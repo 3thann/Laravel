@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Book;
+use App\Models\Author;
+use App\Models\Genre;
 
 
 class BookController extends Controller
@@ -17,13 +19,17 @@ class BookController extends Controller
 
     public function create()
     {
-        return view('book.create');
+        $authors = Author::all();
+        $genres = Genre::all();
+        return view('book.create', compact("authors", "genres"));
     }
 
     public function store(Request $request)
     {
         $book = new Book();
         $book->name = $request->get('name');
+        $book->author_id = $request->get('author_id');
+        $book->genre_id = $request->get('genre_id');
         $book->save();
 
         return redirect()->route("book.index");
@@ -31,7 +37,7 @@ class BookController extends Controller
 
     public function show($id)
     {
-        $book = Book::find($id);
+        $book = Book::with("genre", "author")->find($id);
         
         return view('book.show', compact("book"));
     }
@@ -39,14 +45,18 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
+        $authors = Author::all();
+        $genres = Genre::all();
         
-        return view('book.edit', compact("book"));
+        return view('book.edit', compact("book", "authors", "genres"));
     }
 
     public function update(Request $request, $id)
     {
         $book = Book::find($id);
         $book->name = $request->get('name');
+        $book->author_id = $request->get('author_id');
+        $book->genre_id = $request->get('genre_id');
         $book->save();
         
         return redirect()->route("book.index");

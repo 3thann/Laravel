@@ -22,4 +22,10 @@
             </tr>
         </tbody>
     </table>
+
+    <ul>
+        @foreach ($author->books as $book)
+            <li>{{ $book->name }}</li>
+        @endforeach
+    </ul>
 @endsection

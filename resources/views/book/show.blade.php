@@ -7,6 +7,8 @@
             <tr>
                 <th>id</th>
                 <th>Nom</th>
+                <th>Auteur</th>
+                <th>Genre</th>
                 <th>Date de création</th>
                 <th>Date de modification</th>
             </tr>
@@ -15,6 +17,8 @@
             <tr>
                 <td>{{ $book->id }}</td>
                 <td>{{ $book->name }}</td>
+                <td>{{ $book->author->first_name }} {{ $book->author->last_name }}</td>
+                <td>{{ $book->genre->name }}</td>
                 <td>{{ $book->created_at }}</td>
                 <td>{{ $book->updated_at }}</td>
             </tr>

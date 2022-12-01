@@ -20,4 +20,9 @@
             </tr>
         </tbody>
     </table>
+    <ul>
+        @foreach ($genre->books as $book)
+            <li>{{ $book->name }}</li>
+        @endforeach
+    </ul>
 @endsection

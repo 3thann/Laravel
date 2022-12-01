@@ -7,6 +7,8 @@
             <tr>
                 <th>id</th>
                 <th>Noms</th>
+                <th>Auteurs</th>
+                <th>Genres</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,6 +17,8 @@
                 <tr>
                     <td>{{ $book->id }}</td>
                     <td>{{ $book->name }}</td>
+                    <td>{{ $book->author->first_name }} {{ $book->author->last_name }}</td>
+                    <td>{{ $book->genre->name }}</td>
                     <td>
                         <a href="{{ route('book.show', $book->id) }}">Voir</a>
                         <a href="{{ route('book.edit', $book->id) }}">Modifier</a>
